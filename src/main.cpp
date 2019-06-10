@@ -4,12 +4,8 @@
 #include "sensor_msgs/Image.h"
 #include "sensor_msgs/image_encodings.h"
 #include "sensor_msgs/PointCloud2.h"
-#include "nav_msgs/Odometry.h"
-
-#include <tf/transform_datatypes.h>
 
 #include <cv_bridge/cv_bridge.h>
-
 
 #include <pcl/conversions.h>
 #include <pcl/point_cloud.h>
@@ -20,8 +16,6 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
 #include <opencv2/highgui/highgui.hpp>
-
-#include <Eigen/Dense>
 
 using namespace cv;
 
@@ -46,11 +40,10 @@ void cameraCallback(const sensor_msgs::Image::ConstPtr& img)
   sprintf(str, "%lf", timeimg);
 
   std::string s_timescan = str;
-	
-	
+
   cv_bridge::CvImagePtr cv_cam = cv_bridge::toCvCopy(img, "8UC3");
 
-  imwrite("/home/xl/catkin2_ws/pcdimage/"+s_timescan+".bmp", cv_cam->image);
+  imwrite("some where"+s_timescan+".bmp", cv_cam->image);
 
 	ROS_INFO("imagewancheng!");
 }
@@ -69,7 +62,7 @@ void lidarCallback(const sensor_msgs::PointCloud2::ConstPtr& scan)
 	
   pcl::PointCloud<pcl::PointXYZ> cloud;  
   pcl::fromROSMsg(*scan, cloud);
-  pcl::io::savePCDFileASCII ("/home/xl/catkin2_ws/pcdimage/"+s_timescan+".pcd", cloud);
+  pcl::io::savePCDFileASCII ("some where".pcd", cloud);//改这里
 }
 
 int main(int argc, char **argv)
@@ -78,9 +71,9 @@ int main(int argc, char **argv)
 
  ros::NodeHandle n;
 
- ros::Subscriber velodyne = n.subscribe("/velodyne_points", 2, lidarCallback);
+ ros::Subscriber velodyne = n.subscribe("/your lidar topic", 2, lidarCallback);//改这里
 	
-	ros::Subscriber sub1 = n.subscribe("/usb_cam/image_raw", 2, cameraCallback);
+ ros::Subscriber sub1 = n.subscribe("/your camera topic", 2, cameraCallback);//改这里
 
  ros::spin();
 
