@@ -11,8 +11,6 @@ find_package(catkin
             roscpp
             sensor_msgs
 	    std_msgs
-            nav_msgs
-            geometry_msgs
 	    cv_bridge
 	    pcl_ros
             visualization_msgs
@@ -22,8 +20,6 @@ find_package(OpenCV REQUIRED)
 #add_definitions(${EIGEN_DEFINITIONS})
 
 catkin_package(
-    INCLUDE_DIRS
-            include
     CATKIN_DEPENDS
             roscpp
             sensor_msgs
@@ -35,7 +31,6 @@ catkin_package(
 include_directories(include
     ${catkin_INCLUDE_DIRS}
     ${PCL_INCLUDE_DIRS}
-    ${EIGEN3_INCLUDE_DIR}
 )
 
 link_directories(${PCL_LIBRARY_DIRS} ${EIGEN3_LIBRARY_DIR})
