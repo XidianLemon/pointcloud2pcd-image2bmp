@@ -62,7 +62,7 @@ void lidarCallback(const sensor_msgs::PointCloud2::ConstPtr& scan)
 	
   pcl::PointCloud<pcl::PointXYZ> cloud;  
   pcl::fromROSMsg(*scan, cloud);
-  pcl::io::savePCDFileASCII ("some where".pcd", cloud);//改这里
+  pcl::io::savePCDFileASCII ("somewhere"+s_timescan+".pcd", cloud);
 }
 
 int main(int argc, char **argv)
@@ -71,9 +71,9 @@ int main(int argc, char **argv)
 
  ros::NodeHandle n;
 
- ros::Subscriber velodyne = n.subscribe("/your lidar topic", 2, lidarCallback);//改这里
+ ros::Subscriber velodyne = n.subscribe("/yourlidartopic", 2, lidarCallback);
 	
- ros::Subscriber sub1 = n.subscribe("/your camera topic", 2, cameraCallback);//改这里
+ ros::Subscriber sub1 = n.subscribe("/yourcameratopic", 2, cameraCallback);
 
  ros::spin();
 
